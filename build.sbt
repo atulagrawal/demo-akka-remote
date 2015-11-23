@@ -1,12 +1,20 @@
 lazy val demoAkkaRemote = project
   .in(file("."))
-  .enablePlugins(AutomateHeaderPlugin, GitVersioning)
+  .enablePlugins(GitVersioning)
+  .aggregate(demoAkkaRemoteServerProtocol, demoAkkaRemoteServer, demoAkkaRemoteClient)
+
+lazy val demoAkkaRemoteServerProtocol = project
+  .in(file("demo-akka-remote-server-protocol"))
+  .enablePlugins(AutomateHeaderPlugin)
+
+lazy val demoAkkaRemoteServer = project
+  .in(file("demo-akka-remote-server"))
+  .enablePlugins(AutomateHeaderPlugin, JavaAppPackaging, DockerPlugin)
+  .dependsOn(demoAkkaRemoteServerProtocol)
+
+lazy val demoAkkaRemoteClient = project
+  .in(file("demo-akka-remote-client"))
+  .enablePlugins(AutomateHeaderPlugin, JavaAppPackaging, DockerPlugin)
+  .dependsOn(demoAkkaRemoteServerProtocol)
 
 name := "demo-akka-remote"
-
-libraryDependencies ++= List(
-  Library.scalaCheck % "test",
-  Library.scalaTest  % "test"
-)
-
-initialCommands := """|import de.heikoseeberger.demoakkaremote._""".stripMargin

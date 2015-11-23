@@ -1,5 +1,7 @@
 import com.typesafe.sbt.GitPlugin
 import com.typesafe.sbt.SbtScalariform
+import com.typesafe.sbt.packager.docker.DockerPlugin
+import com.typesafe.sbt.packager.{ Keys => PackagerKeys }
 import de.heikoseeberger.sbtheader.{ HeaderKey, HeaderPlugin }
 import de.heikoseeberger.sbtheader.license.Apache2_0
 import sbt._
@@ -39,6 +41,13 @@ object Build extends AutoPlugin {
       GitPlugin.autoImport.git.baseVersion := "0.1.0",
 
       // Header settings
-      HeaderKey.headers := Map("scala" -> Apache2_0("2015", "Heiko Seeberger"))
+      HeaderKey.headers := Map("scala" -> Apache2_0("2015", "Heiko Seeberger")),
+
+      // Docker settings
+      PackagerKeys.maintainer.in(DockerPlugin.autoImport.Docker) := "Heiko Seeberger",
+      version.in(DockerPlugin.autoImport.Docker)                 := "latest",
+      PackagerKeys.daemonUser.in(DockerPlugin.autoImport.Docker) := "root",
+      DockerPlugin.autoImport.dockerBaseImage                    := "java:8",
+      DockerPlugin.autoImport.dockerRepository                   := Some("hseeberger")
     )
 }
