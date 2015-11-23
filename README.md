@@ -4,7 +4,20 @@ Simple demo for [Akka Remoting](http://doc.akka.io/docs/akka/current/scala/remot
 - demo-akka-remote-server: `EchoServer` responding with `EchoResponse`s to `EchoRequest`s
 - demo-akka-remote-client: `EchoClient` looking up `EchoServer` on configured remote system, periodically sending `EchoRequest`s and logging the `EchoResponse`s
 
-Run both modules locally via separate sbt sessions.
+Either run both modules locally via separate sbt sessions or package them up as Docker images via `docker:publishLocal` and run them by giving some JVM arguments:
+
+```
+docker run --name demo-server -d \
+  -p 2552:2552 \
+  hseeberger/demo-akka-remote-server \
+  -Dakka.remote.netty.tcp.hostname=192.168.99.100
+
+docker run --name demo-client -d \
+  -p 2550:2550 \
+  hseeberger/demo-akka-remote-client \
+  -Dakka.remote.netty.tcp.hostname=192.168.99.100 \
+  -Decho-client.echo-server.host=192.168.99.100
+```
 
 ## Contribution policy ##
 
