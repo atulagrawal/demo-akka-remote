@@ -1,6 +1,10 @@
 # demo-akka-remote #
 
-Welcome to demo-akka-remote!
+Simple demo for [Akka Remoting](http://doc.akka.io/docs/akka/current/scala/remoting.html). There are two modules:
+- demo-akka-remote-server: `EchoServer` responding with `EchoResponse`s to `EchoRequest`s
+- demo-akka-remote-client: `EchoClient` looking up `EchoServer` on configured remote system, periodically sending `EchoRequest`s and logging the `EchoResponse`s
+
+Run both modules locally via separate sbt sessions.
 
 ## Contribution policy ##
 
