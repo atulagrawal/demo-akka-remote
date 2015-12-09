@@ -38,14 +38,13 @@ object Build extends AutoPlugin {
         .setPreference(DoubleIndentClassDeclaration, true),
 
       // Git settings
-      GitPlugin.autoImport.git.baseVersion := "0.1.0",
+      GitPlugin.autoImport.git.useGitDescribe := true,
 
       // Header settings
       HeaderKey.headers := Map("scala" -> Apache2_0("2015", "Heiko Seeberger")),
 
       // Docker settings
       PackagerKeys.maintainer.in(DockerPlugin.autoImport.Docker) := "Heiko Seeberger",
-      version.in(DockerPlugin.autoImport.Docker)                 := "latest",
       PackagerKeys.daemonUser.in(DockerPlugin.autoImport.Docker) := "root",
       DockerPlugin.autoImport.dockerBaseImage                    := "java:8",
       DockerPlugin.autoImport.dockerRepository                   := Some("hseeberger")
