@@ -1,6 +1,7 @@
 name := "demo-akka-remote-server"
 
 libraryDependencies ++= List(
+  Library.akkaKryo,
   Library.akkaRemote,
   Library.akkaTestkit % "test",
   Library.scalaCheck  % "test",

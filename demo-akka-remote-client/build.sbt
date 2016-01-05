@@ -1,10 +1,8 @@
 name := "demo-akka-remote-client"
 
 libraryDependencies ++= List(
-  Library.akkaRemote,
-  Library.akkaTestkit % "test",
-  Library.scalaCheck  % "test",
-  Library.scalaTest   % "test"
+  Library.akkaKryo,
+  Library.akkaRemote
 )
 
 initialCommands := """|import de.heikoseeberger.demoakkaremote.server._""".stripMargin
