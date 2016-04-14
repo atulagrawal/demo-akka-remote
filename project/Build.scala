@@ -32,7 +32,7 @@ object Build extends AutoPlugin {
       unmanagedSourceDirectories.in(Test) := List(scalaSource.in(Test).value),
 
       // Scalariform settings
-      SbtScalariform.autoImport.preferences := SbtScalariform.autoImport.preferences.value
+      SbtScalariform.autoImport.scalariformPreferences := SbtScalariform.autoImport.scalariformPreferences.value
         .setPreference(AlignSingleLineCaseStatements, true)
         .setPreference(AlignSingleLineCaseStatements.MaxArrowIndent, 100)
         .setPreference(DoubleIndentClassDeclaration, true),
@@ -44,8 +44,8 @@ object Build extends AutoPlugin {
       HeaderKey.headers := Map("scala" -> Apache2_0("2015", "Heiko Seeberger")),
 
       // Docker settings
-      PackagerKeys.maintainer.in(DockerPlugin.autoImport.Docker) := "Heiko Seeberger",
       PackagerKeys.daemonUser.in(DockerPlugin.autoImport.Docker) := "root",
+      PackagerKeys.maintainer.in(DockerPlugin.autoImport.Docker) := "Heiko Seeberger",
       DockerPlugin.autoImport.dockerBaseImage                    := "java:8",
       DockerPlugin.autoImport.dockerRepository                   := Some("hseeberger")
     )
